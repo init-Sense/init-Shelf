@@ -3,21 +3,45 @@ import { Text, View } from "react-native";
 
 export default function Index() {
 	return (
-		<View
-			style={{
-				flex: 1,
-				justifyContent: "center",
-				alignItems: "center",
-			}}
-		>
-			<Text
-				style={{
-					color: "blue",
-				}}
+		<View className={"flex flex-col gap-4 items-center py-4"}>
+			<View
+				className={
+					"flex flex-row justify-between items-center w-full px-6 pb-16"
+				}
 			>
-				Edit app/index.tsx to edit this screen.
-			</Text>
-			<Link href="./books">Go to Books</Link>
+				<Text className={"text-[32px] text-black"}>init.Shelf</Text>
+				<View className={"w-[48px] h-[48px] bg-gray-300 rounded-full"} />
+			</View>
+			<Link href={"./books"}>
+				<View
+					className={
+						"border w-[368px] h-[144px] flex flex-row justify-between px-3"
+					}
+				>
+					<Text className={"my-auto text-xl text-black"}>books</Text>
+					<Text className={"my-auto text-xl text-black/50"}>432</Text>
+				</View>
+			</Link>{" "}
+			<Link href={"./films"}>
+				<View
+					className={
+						"border w-[368px] h-[144px] flex flex-row justify-between px-3"
+					}
+				>
+					<Text className={"my-auto text-xl text-black"}>filming soon</Text>
+					<Text className={"my-auto text-xl text-black/50"}>???</Text>
+				</View>
+			</Link>{" "}
+			<Link href={"./games"}>
+				<View
+					className={
+						"border w-[368px] h-[144px] flex flex-row justify-between px-3"
+					}
+				>
+					<Text className={"my-auto text-xl text-black"}>gaming soon</Text>
+					<Text className={"my-auto text-xl text-black/50"}>???</Text>
+				</View>
+			</Link>
 		</View>
 	);
 }
