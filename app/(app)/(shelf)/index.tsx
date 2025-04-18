@@ -1,9 +1,9 @@
-import { useSession } from "@/store/ctx";
+import { useSession } from "@/store/AuthContext";
 import { Link } from "expo-router";
 import { Text, View } from "react-native";
 
 export default function Index() {
-	const { signOut } = useSession();
+	const { signOut, userData } = useSession();
 
 	return (
 		<View className={"flex flex-col gap-4 items-center py-4"}>
@@ -12,7 +12,9 @@ export default function Index() {
 					"flex flex-row justify-between items-center w-full px-6 pb-16"
 				}
 			>
-				<Text className={"text-[32px] text-black"}>init.Shelf</Text>
+				<Text className={"text-[28px] text-black"}>
+					{userData?.username}'s Shelf
+				</Text>
 				<Text
 					onPress={() => {
 						signOut();

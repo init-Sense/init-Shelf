@@ -1,16 +1,8 @@
 // sign-up.tsx
-import { useSession } from "@/store/ctx";
+import { useSession } from "@/store/AuthContext";
 import { router } from "expo-router";
 import { useState } from "react";
-import {
-	Alert,
-	ScrollView,
-	StyleSheet,
-	Text,
-	TextInput,
-	TouchableOpacity,
-	View,
-} from "react-native";
+import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function SignUp() {
 	const { signUp, isLoading } = useSession();
@@ -59,14 +51,14 @@ export default function SignUp() {
 	};
 
 	return (
-		<ScrollView contentContainerStyle={styles.scrollContainer}>
-			<View style={styles.container}>
-				<Text style={styles.title}>Create Account</Text>
+		<View className={"flex flex-col items-center justify-center h-full"}>
+			<Text className={"font-bold mb-4 text-lg"}>Why are you doing this?</Text>
 
-				<View style={styles.inputContainer}>
-					<Text style={styles.label}>Username</Text>
+			<View>
+				<View className={"flex flex-col gap-2 mb-4"}>
+					<Text className={"font-bold"}>Username</Text>
 					<TextInput
-						style={styles.input}
+						className={"border p-4"}
 						placeholder="Choose a username"
 						value={username}
 						onChangeText={setUsername}
@@ -74,10 +66,10 @@ export default function SignUp() {
 					/>
 				</View>
 
-				<View style={styles.inputContainer}>
-					<Text style={styles.label}>Email</Text>
+				<View className={"flex flex-col gap-2 mb-4"}>
+					<Text className={"font-bold"}>Email</Text>
 					<TextInput
-						style={styles.input}
+						className={"border p-4"}
 						placeholder="Enter your email address"
 						value={email}
 						onChangeText={setEmail}
@@ -86,10 +78,10 @@ export default function SignUp() {
 					/>
 				</View>
 
-				<View style={styles.inputContainer}>
-					<Text style={styles.label}>Password</Text>
+				<View className={"flex flex-col gap-2 mb-4"}>
+					<Text className={"font-bold"}>Password</Text>
 					<TextInput
-						style={styles.input}
+						className={"border p-4"}
 						placeholder="Choose a password"
 						value={password}
 						onChangeText={setPassword}
@@ -97,10 +89,10 @@ export default function SignUp() {
 					/>
 				</View>
 
-				<View style={styles.inputContainer}>
-					<Text style={styles.label}>Confirm Password</Text>
+				<View className={"flex flex-col gap-2"}>
+					<Text className={"font-bold"}>Confirm Password</Text>
 					<TextInput
-						style={styles.input}
+						className={"border p-4"}
 						placeholder="Confirm your password"
 						value={confirmPassword}
 						onChangeText={setConfirmPassword}
@@ -109,77 +101,20 @@ export default function SignUp() {
 				</View>
 
 				<TouchableOpacity
-					style={styles.button}
+					className={"border p-4 mt-12 bg-gray-100"}
 					onPress={handleSignUp}
 					disabled={isLoading}
 				>
-					<Text style={styles.buttonText}>
-						{isLoading ? "Creating Account..." : "Sign Up"}
-					</Text>
+					<Text>{isLoading ? "Creating Account..." : "Sign Up"}</Text>
 				</TouchableOpacity>
 
 				<TouchableOpacity
-					style={styles.linkContainer}
+					className={"p-2 mt-4 items-center"}
 					onPress={() => router.replace("/sign-in")}
 				>
-					<Text style={styles.link}>Already have an account? Sign In</Text>
+					<Text className={"underline"}>Already have an account? Sign In</Text>
 				</TouchableOpacity>
 			</View>
-		</ScrollView>
+		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	scrollContainer: {
-		flexGrow: 1,
-	},
-	container: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-		padding: 20,
-	},
-	title: {
-		fontSize: 24,
-		fontWeight: "bold",
-		marginBottom: 20,
-		marginTop: 40,
-	},
-	inputContainer: {
-		width: "100%",
-		marginVertical: 10,
-	},
-	label: {
-		marginBottom: 5,
-		fontSize: 16,
-	},
-	input: {
-		borderWidth: 1,
-		borderColor: "#ccc",
-		borderRadius: 5,
-		padding: 10,
-		fontSize: 16,
-		width: "100%",
-	},
-	button: {
-		backgroundColor: "#4CAF50",
-		padding: 15,
-		borderRadius: 5,
-		width: "100%",
-		alignItems: "center",
-		marginTop: 20,
-	},
-	buttonText: {
-		color: "white",
-		fontSize: 16,
-		fontWeight: "bold",
-	},
-	linkContainer: {
-		marginTop: 20,
-		marginBottom: 40,
-	},
-	link: {
-		color: "#2196F3",
-		textDecorationLine: "underline",
-	},
-});

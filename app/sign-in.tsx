@@ -1,15 +1,8 @@
 // sign-in.tsx
-import { useSession } from "@/store/ctx";
+import { useSession } from "@/store/AuthContext";
 import { router } from "expo-router";
 import { useState } from "react";
-import {
-	Alert,
-	StyleSheet,
-	Text,
-	TextInput,
-	TouchableOpacity,
-	View,
-} from "react-native";
+import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function SignIn() {
 	const { signIn, isLoading } = useSession();
@@ -32,98 +25,48 @@ export default function SignIn() {
 	};
 
 	return (
-		<View style={styles.container}>
-			<Text style={styles.title}>Sign In</Text>
+		<View className={"p-4 flex flex-col items-center justify-center h-full"}>
+			<Text className={"font-bold mb-4 text-lg"}>Get Shelv'd</Text>
 
-			<View style={styles.inputContainer}>
-				<Text style={styles.label}>Email</Text>
-				<TextInput
-					style={styles.input}
-					placeholder="Enter your email"
-					value={email}
-					onChangeText={setEmail}
-					autoCapitalize="none"
-					keyboardType="email-address"
-				/>
+			<View>
+				<View className={"flex flex-col gap-2 mb-4"}>
+					<Text className={"font-bold"}>Email</Text>
+					<TextInput
+						className={"border p-4"}
+						placeholder="Enter your email"
+						value={email}
+						onChangeText={setEmail}
+						autoCapitalize="none"
+						keyboardType="email-address"
+					/>
+				</View>
+
+				<View className={"flex flex-col gap-2"}>
+					<Text className={"font-bold"}>Password</Text>
+					<TextInput
+						className={"border p-4"}
+						placeholder="Enter your password"
+						value={password}
+						onChangeText={setPassword}
+						secureTextEntry
+					/>
+				</View>
+
+				<TouchableOpacity
+					className={"border p-4 mt-12 bg-gray-100"}
+					onPress={handleSignIn}
+					disabled={isLoading}
+				>
+					<Text>{isLoading ? "Signing In..." : "Sign In"}</Text>
+				</TouchableOpacity>
+
+				<TouchableOpacity
+					className={"p-2 mt-4 items-center"}
+					onPress={() => router.replace("/sign-up")}
+				>
+					<Text className={"underline"}>Don't have an account? Sign Up</Text>
+				</TouchableOpacity>
 			</View>
-
-			<View style={styles.inputContainer}>
-				<Text style={styles.label}>Password</Text>
-				<TextInput
-					style={styles.input}
-					placeholder="Enter your password"
-					value={password}
-					onChangeText={setPassword}
-					secureTextEntry
-				/>
-			</View>
-
-			<TouchableOpacity
-				style={styles.button}
-				onPress={handleSignIn}
-				disabled={isLoading}
-			>
-				<Text style={styles.buttonText}>
-					{isLoading ? "Signing In..." : "Sign In"}
-				</Text>
-			</TouchableOpacity>
-
-			<TouchableOpacity
-				style={styles.linkContainer}
-				onPress={() => router.replace("/sign-up")}
-			>
-				<Text style={styles.link}>Don't have an account? Sign Up</Text>
-			</TouchableOpacity>
 		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-		padding: 20,
-	},
-	title: {
-		fontSize: 24,
-		fontWeight: "bold",
-		marginBottom: 20,
-	},
-	inputContainer: {
-		width: "100%",
-		marginVertical: 10,
-	},
-	label: {
-		marginBottom: 5,
-		fontSize: 16,
-	},
-	input: {
-		borderWidth: 1,
-		borderColor: "#ccc",
-		borderRadius: 5,
-		padding: 10,
-		fontSize: 16,
-		width: "100%",
-	},
-	button: {
-		backgroundColor: "#2196F3",
-		padding: 15,
-		borderRadius: 5,
-		width: "100%",
-		alignItems: "center",
-		marginTop: 20,
-	},
-	buttonText: {
-		color: "white",
-		fontSize: 16,
-		fontWeight: "bold",
-	},
-	linkContainer: {
-		marginTop: 20,
-	},
-	link: {
-		color: "#4CAF50",
-		textDecorationLine: "underline",
-	},
-});

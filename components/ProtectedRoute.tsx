@@ -1,5 +1,5 @@
 // components/ProtectedRoute.tsx
-import { useSession } from "@/store/ctx";
+import { useSession } from "@/store/AuthContext";
 import { router } from "expo-router";
 import { useEffect } from "react";
 import { ActivityIndicator, View } from "react-native";
