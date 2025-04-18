@@ -1,7 +1,10 @@
+import { useSession } from "@/store/ctx";
 import { Link } from "expo-router";
 import { Text, View } from "react-native";
 
 export default function Index() {
+	const { signOut } = useSession();
+
 	return (
 		<View className={"flex flex-col gap-4 items-center py-4"}>
 			<View
@@ -10,7 +13,14 @@ export default function Index() {
 				}
 			>
 				<Text className={"text-[32px] text-black"}>init.Shelf</Text>
-				<View className={"w-[48px] h-[48px] bg-gray-300 rounded-full"} />
+				<Text
+					onPress={() => {
+						signOut();
+					}}
+				>
+					Sign Out
+				</Text>
+				{/*<View className={"w-[48px] h-[48px] bg-gray-300 rounded-full"} />*/}
 			</View>
 			<Link href={"./books"}>
 				<View
