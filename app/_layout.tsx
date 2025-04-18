@@ -1,5 +1,5 @@
 import "./global.css";
-import { SessionProvider } from "@/store/AuthContext";
+import { SessionProvider } from "@/store/AuthSessionProvider";
 import { Slot } from "expo-router";
 
 export default function RootLayout() {

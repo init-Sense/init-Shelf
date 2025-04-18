@@ -1,10 +1,11 @@
-import { Redirect, Stack } from "expo-router";
-import "../../global.css";
+import { Redirect, Stack, router } from "expo-router";
+import "@/app/global.css";
 import { chartsIcon } from "@/assets/icons/charts-icon";
 import { plusIcon } from "@/assets/icons/plus-icon";
 import { searchIcon } from "@/assets/icons/search-icon";
 import { shelfIcon } from "@/assets/icons/shelf-icon";
-import { useSession } from "@/store/AuthContext";
+import { useSession } from "@/store/AuthSessionProvider";
+import { QueryProvider } from "@/store/QueryProvider";
 import { Pressable, View } from "react-native";
 import { SvgXml } from "react-native-svg";
 
@@ -20,37 +21,28 @@ export default function AppLayout() {
 	}
 
 	return (
-		<>
+		<QueryProvider>
 			<Stack screenOptions={{ headerShown: false }} />
-			<View
-				className={
-					"flex flex-row w-full justify-between py-[16px] px-8 items-center"
-				}
-			>
+			<View className="flex flex-row w-full justify-between py-[16px] px-8 items-center">
 				<Pressable
-					className={"w-[81px+] h-[64px] flex items-center justify-center "}
-					onPress={() => console.log("Ciao")}
+					className="w-[81px+] h-[64px] flex items-center justify-center"
+					onPress={() => router.push("/")}
 				>
 					<SvgXml xml={shelfIcon} />
 				</Pressable>
-				<Pressable
-					className={"w-[81px+] h-[64px] flex items-center justify-center "}
-				>
+				<Pressable className="w-[81px+] h-[64px] flex items-center justify-center">
 					<SvgXml xml={chartsIcon} />
 				</Pressable>
 				<Pressable
-					className={"w-[81px+] h-[64px] flex items-center justify-center "}
+					className="w-[81px+] h-[64px] flex items-center justify-center"
+					onPress={() => router.push("/search")}
 				>
 					<SvgXml xml={searchIcon} />
 				</Pressable>
-				<Pressable
-					className={
-						"bg-black w-[81px+] h-[64px] flex items-center justify-center "
-					}
-				>
+				<Pressable className="bg-black w-[81px+] h-[64px] flex items-center justify-center">
 					<SvgXml xml={plusIcon} />
 				</Pressable>
 			</View>
-		</>
+		</QueryProvider>
 	);
 }

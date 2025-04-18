@@ -1,4 +1,4 @@
-import { useSession } from "@/store/AuthContext";
+import { useSession } from "@/store/AuthSessionProvider";
 import { Link } from "expo-router";
 import { Text, View } from "react-native";
 
@@ -33,7 +33,7 @@ export default function Index() {
 					<Text className={"my-auto text-xl text-black"}>books</Text>
 					<Text className={"my-auto text-xl text-black/50"}>432</Text>
 				</View>
-			</Link>{" "}
+			</Link>
 			<Link href={"./films"}>
 				<View
 					className={
@@ -43,7 +43,7 @@ export default function Index() {
 					<Text className={"my-auto text-xl text-black"}>filming soon</Text>
 					<Text className={"my-auto text-xl text-black/50"}>???</Text>
 				</View>
-			</Link>{" "}
+			</Link>
 			<Link href={"./games"}>
 				<View
 					className={

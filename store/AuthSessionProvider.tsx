@@ -27,7 +27,7 @@ type AuthContextProps = {
 	isLoading: boolean;
 };
 
-const AuthContext = createContext<AuthContextProps>({
+const AuthSessionProvider = createContext<AuthContextProps>({
 	signIn: async () => ({ error: null }),
 	signUp: async () => ({ error: null }),
 	signOut: async () => {},
@@ -37,10 +37,12 @@ const AuthContext = createContext<AuthContextProps>({
 });
 
 export function useSession() {
-	const value = useContext(AuthContext);
+	const value = useContext(AuthSessionProvider);
 	if (process.env.NODE_ENV !== "production") {
 		if (!value) {
-			throw new Error("useSession must be wrapped in a <SessionProvider />");
+			throw new Error(
+				"useSession must be wrapped in a <AuthSessionProvider />",
+			);
 		}
 	}
 	return value;
@@ -221,7 +223,7 @@ export function SessionProvider({ children }: PropsWithChildren) {
 	};
 
 	return (
-		<AuthContext.Provider
+		<AuthSessionProvider.Provider
 			value={{
 				signIn,
 				signUp,
@@ -232,6 +234,6 @@ export function SessionProvider({ children }: PropsWithChildren) {
 			}}
 		>
 			{children}
-		</AuthContext.Provider>
+		</AuthSessionProvider.Provider>
 	);
 }

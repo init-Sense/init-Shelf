@@ -1,5 +1,4 @@
-// components/ProtectedRoute.tsx
-import { useSession } from "@/store/AuthContext";
+import { useSession } from "@/store/AuthSessionProvider";
 import { router } from "expo-router";
 import { useEffect } from "react";
 import { ActivityIndicator, View } from "react-native";
@@ -13,7 +12,6 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
 
 	useEffect(() => {
 		if (!isLoading && !session) {
-			// Redirect to sign-in if not authenticated
 			router.replace("/sign-in");
 		}
 	}, [session, isLoading]);
@@ -26,6 +24,5 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
 		);
 	}
 
-	// Only render children if authenticated
 	return session ? <>{children}</> : null;
 }
