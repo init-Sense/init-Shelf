@@ -131,7 +131,6 @@ export default function EditionDetails() {
 								</Text>
 							)}
 
-							{/* Add to collection buttons */}
 							<View className="flex-row mt-4">
 								<TouchableOpacity
 									className="bg-black px-4 py-2 mr-2 rounded"
@@ -213,7 +212,6 @@ export default function EditionDetails() {
 							)}
 						</View>
 					</View>
-					+{" "}
 					<View className="mb-6">
 						<Text className="text-lg font-semibold mb-2">Description</Text>
 						<Text className="text-gray-700">
