@@ -1,0 +1,16 @@
+meta {
+  name: Google Search By Id
+  type: http
+  seq: 6
+}
+
+get {
+  url: https://www.googleapis.com/books/v1/volumes?q=finzioni inauthor:borges&key={{apiKey}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  q: finzioni inauthor:borges
+  key: {{apiKey}}
+}
