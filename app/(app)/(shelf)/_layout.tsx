@@ -33,13 +33,13 @@ export default function AppLayout() {
 				<Pressable className="w-[81px+] h-[64px] flex items-center justify-center">
 					<SvgXml xml={chartsIcon} />
 				</Pressable>
-				<Pressable
-					className="w-[81px+] h-[64px] flex items-center justify-center"
-					onPress={() => router.push("/search")}
-				>
+				<Pressable className="w-[81px+] h-[64px] flex items-center justify-center">
 					<SvgXml xml={searchIcon} />
 				</Pressable>
-				<Pressable className="bg-black w-[81px+] h-[64px] flex items-center justify-center">
+				<Pressable
+					onPress={() => router.push("/search")}
+					className="bg-black w-[81px+] h-[64px] flex items-center justify-center"
+				>
 					<SvgXml xml={plusIcon} />
 				</Pressable>
 			</View>
