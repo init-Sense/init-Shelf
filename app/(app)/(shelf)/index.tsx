@@ -1,59 +1,57 @@
-import { useSession } from "@/store/AuthSessionProvider";
-import { Link } from "expo-router";
-import { Text, View } from "react-native";
+import { useLibraryStore } from "@/store/useLibraryStore";
+import { Link, usePathname } from "expo-router";
+import { type FC, useEffect } from "react";
+import { Pressable, Text, View } from "react-native";
 
-export default function Index() {
-	const { signOut, userData } = useSession();
+const Index: FC = () => {
+	const pathname = usePathname();
+	const { currentLibrary, setCurrentLibrary, getCurrentLibraryCategories } =
+		useLibraryStore();
+
+	useEffect(() => {
+		if (pathname.includes("/films")) {
+			setCurrentLibrary("films");
+		} else if (pathname.includes("/games")) {
+			setCurrentLibrary("games");
+		} else {
+			setCurrentLibrary("books");
+		}
+	}, [pathname, setCurrentLibrary]);
+
+	const categories = getCurrentLibraryCategories();
 
 	return (
-		<View className={"flex flex-col gap-4 items-center py-4"}>
-			<View
-				className={
-					"flex flex-row justify-between items-center w-full px-6 pb-16"
-				}
-			>
-				<Text className={"text-[28px] text-black"}>
-					{userData?.username}'s Shelf
-				</Text>
-				<Text
-					onPress={() => {
-						signOut();
+		<View className="flex flex-col gap-4 items-center py-4">
+			{categories.map((category) => (
+				<Link
+					key={category.id}
+					href={{
+						pathname: `/${currentLibrary}/[category]`,
+						params: { category: category.id },
 					}}
 				>
-					Sign Out
-				</Text>
-				{/*<View className={"w-[48px] h-[48px] bg-gray-300 rounded-full"} />*/}
-			</View>
-			<Link href={"./books"}>
-				<View
-					className={
-						"border w-[368px] h-[144px] flex flex-row justify-between px-3"
-					}
-				>
-					<Text className={"my-auto text-xl text-black"}>books</Text>
-					<Text className={"my-auto text-xl text-black/50"}>432</Text>
+					<View
+						className={
+							category.id === "owned" || category.id === "watched"
+								? "border w-[368px] h-[238px] flex flex-row justify-between px-3"
+								: "border w-[368px] h-[44px] flex flex-row justify-between px-3"
+						}
+					>
+						<Text className="my-auto text-xl text-black">{category.label}</Text>
+						<Text className="my-auto text-xl text-black/50">
+							{category.count}
+						</Text>
+					</View>
+				</Link>
+			))}
+
+			<Pressable>
+				<View className="border w-[368px] h-[44px] flex flex-row justify-between px-3">
+					<Text className="m-auto text-xl text-black">+</Text>
 				</View>
-			</Link>
-			<Link href={"./films"}>
-				<View
-					className={
-						"border w-[368px] h-[144px] flex flex-row justify-between px-3"
-					}
-				>
-					<Text className={"my-auto text-xl text-black"}>filming soon</Text>
-					<Text className={"my-auto text-xl text-black/50"}>???</Text>
-				</View>
-			</Link>
-			<Link href={"./games"}>
-				<View
-					className={
-						"border w-[368px] h-[144px] flex flex-row justify-between px-3"
-					}
-				>
-					<Text className={"my-auto text-xl text-black"}>gaming soon</Text>
-					<Text className={"my-auto text-xl text-black/50"}>???</Text>
-				</View>
-			</Link>
+			</Pressable>
 		</View>
 	);
-}
+};
+
+export default Index;
