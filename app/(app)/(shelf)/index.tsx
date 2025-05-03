@@ -38,6 +38,7 @@ const Index: FC = () => {
 						}
 					>
 						<Text className="my-auto text-xl text-black">{category.label}</Text>
+						a
 						<Text className="my-auto text-xl text-black/50">
 							{category.count}
 						</Text>

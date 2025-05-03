@@ -1,0 +1,15 @@
+meta {
+  name: Get Google Volume
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://www.googleapis.com/books/v1/volumes/fQrtAwAAQBAJ?key=AIzaSyATMBDk1PAVKLbDolPT7kscxtpGWJzgJmc
+  body: none
+  auth: inherit
+}
+
+params:query {
+  key: AIzaSyATMBDk1PAVKLbDolPT7kscxtpGWJzgJmc
+}

@@ -1,0 +1,17 @@
+meta {
+  name: Get Google Volumes
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://www.googleapis.com/books/v1/volumes?q=finzioni&langRestrict=it&fields=items(id,volumeInfo(title,authors,publisher,publishedDate,description,dimensions,industryIdentifiers,pageCount,printType,categories,imageLinks),searchInfo)
+  body: none
+  auth: inherit
+}
+
+params:query {
+  q: finzioni
+  langRestrict: it
+  fields: items(id,volumeInfo(title,authors,publisher,publishedDate,description,dimensions,industryIdentifiers,pageCount,printType,categories,imageLinks),searchInfo)
+}
