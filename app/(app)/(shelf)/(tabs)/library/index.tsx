@@ -6,7 +6,7 @@ export default function Index() {
 		<View className={"flex flex-col gap-4 items-center mt-auto py-4"}>
 			<Link
 				href={{
-					pathname: "/books/[category]",
+					pathname: "/library/[category]",
 					params: { category: "owned" },
 				}}
 			>
@@ -21,7 +21,7 @@ export default function Index() {
 			</Link>
 			<Link
 				href={{
-					pathname: "/books/[category]",
+					pathname: "/library/[category]",
 					params: { category: "wishlist" },
 				}}
 			>

@@ -6,7 +6,7 @@ export default function Category() {
 
 	return (
 		<View>
-			<Text>Welcome to the {category.toString()} category!</Text>
+			<Text>Welcome to the category!</Text>
 		</View>
 	);
 }

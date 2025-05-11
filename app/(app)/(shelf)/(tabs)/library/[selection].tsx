@@ -13,9 +13,9 @@ import {
 } from "react-native";
 
 export default function BookDetailScreen() {
-	const { id } = useLocalSearchParams<{ id: string }>();
+	const { selection } = useLocalSearchParams<{ selection: string }>();
 	const router = useRouter();
-	const { data: book, isLoading, error } = useBook(id);
+	const { data: book, isLoading, error } = useBook(selection);
 	const windowHeight = Dimensions.get("window").height;
 
 	if (isLoading) {
