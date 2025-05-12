@@ -53,7 +53,10 @@ export default function SearchScreen() {
 	};
 
 	const handleBookPress = (book: GoogleBook) => {
-		router.push(`/search/${book.id}`);
+		router.push({
+			pathname: "/search/(details)/[selection]",
+			params: { selection: book.id },
+		});
 	};
 
 	const renderBookItem = ({ item }: { item: GoogleBook }) => (
@@ -163,8 +166,7 @@ export default function SearchScreen() {
 									<View className="flex flex-row">
 										<TouchableOpacity className="px-1">
 											<View className="flex flex-row">
-												<View className="h-5 w-5 border-t border-b border-black rounded-full"></View>
-												<View className="h-5 w-5 -ml-2.5 border-t border-b border-black rounded-full"></View>
+												<SvgXml xml={barCodeIcon} width={24} height={24} />
 											</View>
 										</TouchableOpacity>
 									</View>
