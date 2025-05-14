@@ -2,6 +2,7 @@ import { barCodeIcon } from "@/assets/icons/bar-code-icon";
 import { shelfIcon } from "@/assets/icons/shelf-icon";
 import { useBooks } from "@/hooks/useBooks";
 import type { GoogleBook } from "@/lib/api/googleBooks";
+import { cn } from "@/lib/utils/cn";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
@@ -27,6 +28,7 @@ export default function SearchScreen() {
 	const router = useRouter();
 	const [keyboardVisible, setKeyboardVisible] = useState(false);
 	const screenWidth = Dimensions.get("window").width;
+	const [filter, setFilter] = useState<"all" | "owned" | "wishlist">("all");
 
 	useEffect(() => {
 		const keyboardDidShowListener = Keyboard.addListener(
@@ -149,33 +151,77 @@ export default function SearchScreen() {
 					)}
 				</View>
 
+				{books && books.length > 0 && (
+					<View className="bg-black py-5 px-4 rounded-t-[30px] flex flex-row justify-between items-center">
+						<TouchableOpacity
+							className={cn(
+								filter === "all" ? "bg-white rounded-full" : "bg-black",
+								"w-1/3 h-10 flex items-center justify-center",
+							)}
+							onPress={() => setFilter("all")}
+						>
+							<Text
+								className={cn(
+									filter === "all" ? "text-black" : "text-white",
+									"text-[16px] text-center",
+								)}
+							>
+								all • {books?.length}
+							</Text>
+						</TouchableOpacity>
+						<TouchableOpacity
+							className={cn(
+								filter === "owned" ? "bg-white rounded-full" : "bg-black",
+								"w-1/3 h-10 flex items-center justify-center",
+							)}
+							onPress={() => setFilter("owned")}
+						>
+							<Text
+								className={cn(
+									filter === "owned" ? "text-black" : "text-white",
+									"text-[16px] text-center",
+								)}
+							>
+								owned • 2
+							</Text>
+						</TouchableOpacity>
+						<TouchableOpacity
+							className={cn(
+								filter === "wishlist" ? "bg-white rounded-full" : "bg-black",
+								"w-1/3 h-10 flex items-center justify-center",
+							)}
+							onPress={() => setFilter("wishlist")}
+						>
+							<Text
+								className={cn(
+									filter === "wishlist" ? "text-black" : "text-white",
+									"text-[16px] text-center",
+								)}
+							>
+								wishlist • 1
+							</Text>
+						</TouchableOpacity>
+					</View>
+				)}
 				{!searchQuery && (
-					<View className="bg-black py-5 px-4">
+					<View className="bg-black py-5 px-4 rounded-t-[30px]">
 						<View className="flex flex-row items-center">
-							<View className="flex-1 mr-4">
+							<View className="flex-1 ">
 								<View className="flex flex-row items-center bg-white rounded-2xl px-4 py-3">
 									<TextInput
 										value={query}
 										onChangeText={setQuery}
-										placeholder="finzioni"
+										placeholder="search..."
 										returnKeyType="search"
 										onSubmitEditing={handleSearch}
 										className="flex-1 text-base"
 										autoFocus
 									/>
-									<View className="flex flex-row">
-										<TouchableOpacity className="px-1">
-											<View className="flex flex-row">
-												<SvgXml xml={barCodeIcon} width={24} height={24} />
-											</View>
-										</TouchableOpacity>
-									</View>
+									<TouchableOpacity className="justify-center items-center">
+										<SvgXml xml={barCodeIcon} width={24} height={24} />
+									</TouchableOpacity>
 								</View>
 							</View>
-
-							<TouchableOpacity className="p-3 justify-center items-center">
-								<SvgXml xml={barCodeIcon} width={24} height={24} />
-							</TouchableOpacity>
 						</View>
 					</View>
 				)}

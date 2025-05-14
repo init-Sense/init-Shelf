@@ -3,10 +3,11 @@ import "@/app/global.css";
 import { chartsIcon } from "@/assets/icons/charts-icon";
 import { searchIcon } from "@/assets/icons/search-icon";
 import { shelfIcon } from "@/assets/icons/shelf-icon";
+import { cn } from "@/lib/utils/cn";
 import { useSession } from "@/store/AuthSessionProvider";
 import { QueryProvider } from "@/store/QueryProvider";
 import { type FC, useEffect, useState } from "react";
-import { Keyboard, Platform, Text, View } from "react-native";
+import { Keyboard, Platform, Text, TouchableOpacity } from "react-native";
 import { SvgXml } from "react-native-svg";
 
 const AppLayout: FC = () => {
@@ -42,48 +43,80 @@ const AppLayout: FC = () => {
 				screenOptions={{
 					headerShown: false,
 					tabBarStyle: {
-						display: isKeyboardVisible ? "none" : "flex",
-						height: 85,
-						paddingTop: 10,
-						paddingHorizontal: 16,
-						borderTopWidth: 1,
-						borderTopColor: "#E5E5E5",
-						backgroundColor: "#FFFFFF",
+						borderTopWidth: 0,
+						height: isKeyboardVisible ? 0 : 75,
 					},
-					tabBarShowLabel: false,
 				}}
 			>
 				<Tabs.Screen
 					name="library"
 					options={{
 						tabBarIcon: ({ focused }) => (
-							<View className="bg-[#F2F2F2] rounded-full w-28 h-[60px] justify-center items-center">
-								<SvgXml xml={shelfIcon} width={24} height={24} />
-								<Text className="text-sm font-medium text-black mt-1">
-									library
-								</Text>
-							</View>
+							<SvgXml xml={shelfIcon} width={30} height={30} />
 						),
+						tabBarLabel: ({ focused }) => (
+							<Text
+								className={`text-sm font-semibold ${
+									focused ? "text-black" : "text-black/50"
+								}`}
+							>
+								library
+							</Text>
+						),
+						tabBarButton: ({ children, onPress }) => {
+							if (isKeyboardVisible) {
+								return (
+									<TouchableOpacity
+										onPress={onPress}
+										className={cn("flex-1 justify-center items-center my-1")}
+									>
+										{children}
+									</TouchableOpacity>
+								);
+							}
+
+							return (
+								<TouchableOpacity
+									onPress={onPress}
+									className="flex-1 justify-center items-center my-1"
+								>
+									{children}
+								</TouchableOpacity>
+							);
+						},
 					}}
 				/>
 				<Tabs.Screen
 					name="search"
 					options={{
 						tabBarIcon: ({ focused }) => (
-							<View className="bg-black rounded-full w-[150px] h-[60px] justify-center items-center mb-2.5">
-								<SvgXml
-									xml={searchIcon}
-									width={30}
-									height={30}
-									color="white"
-									fill="white"
-									stroke="white"
-								/>
-							</View>
+							<SvgXml xml={searchIcon} width={30} height={30} />
 						),
-						href: {
-							pathname: "/search/[media]",
-							params: { media: "books" },
+						tabBarLabel: ({ focused }) => (
+							<Text className={"text-sm absolute text-transparent"}>
+								Search
+							</Text>
+						),
+						tabBarButton: ({ children, onPress }) => {
+							if (isKeyboardVisible) {
+								return (
+									<TouchableOpacity
+										onPress={onPress}
+										className="flex-1 justify-center items-center bg-black rounded-full my-1"
+									>
+										{children}
+									</TouchableOpacity>
+								);
+							}
+
+							return (
+								<TouchableOpacity
+									onPress={onPress}
+									className="flex-1 justify-center items-center bg-black rounded-full my-1"
+								>
+									{children}
+								</TouchableOpacity>
+							);
 						},
 					}}
 				/>
@@ -91,13 +124,38 @@ const AppLayout: FC = () => {
 					name="progress"
 					options={{
 						tabBarIcon: ({ focused }) => (
-							<View className="justify-center items-center h-[60px] w-28">
-								<SvgXml xml={chartsIcon} width={24} height={24} />
-								<Text className="text-sm font-medium text-black mt-1">
-									progress
-								</Text>
-							</View>
+							<SvgXml xml={chartsIcon} width={30} height={30} />
 						),
+						tabBarLabel: ({ focused }) => (
+							<Text
+								className={`text-sm font-semibold ${
+									focused ? "text-black" : "text-black/50"
+								}`}
+							>
+								progress
+							</Text>
+						),
+						tabBarButton: ({ children, onPress }) => {
+							if (isKeyboardVisible) {
+								return (
+									<TouchableOpacity
+										onPress={onPress}
+										className="flex-1 justify-center items-center my-1"
+									>
+										{children}
+									</TouchableOpacity>
+								);
+							}
+
+							return (
+								<TouchableOpacity
+									onPress={onPress}
+									className="flex-1 justify-center items-center my-1"
+								>
+									{children}
+								</TouchableOpacity>
+							);
+						},
 					}}
 				/>
 				<Tabs.Screen
