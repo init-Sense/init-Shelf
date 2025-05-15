@@ -1,4 +1,5 @@
 import { barCodeIcon } from "@/assets/icons/bar-code-icon";
+import { searchIcon } from "@/assets/icons/search-icon";
 import { shelfIcon } from "@/assets/icons/shelf-icon";
 import { useBooks } from "@/hooks/useBooks";
 import type { GoogleBook } from "@/lib/api/googleBooks";
@@ -56,8 +57,8 @@ export default function SearchScreen() {
 
 	const handleBookPress = (book: GoogleBook) => {
 		router.push({
-			pathname: "/search/(details)/[selection]",
-			params: { selection: book.id },
+			pathname: "/search/(results)/[id]",
+			params: { id: book.id },
 		});
 	};
 
@@ -79,19 +80,20 @@ export default function SearchScreen() {
 			</View>
 			<View className="flex-1 p-4 pr-2" style={{ maxWidth: screenWidth - 100 }}>
 				{item.volumeInfo.authors && (
-					<Text className="text-gray-600 text-sm" numberOfLines={1}>
+					<Text className="text-gray-600 text-[16px]" numberOfLines={1}>
 						{item.volumeInfo.authors.join(", ")}
 					</Text>
 				)}
-				<Text className="font-semibold text-lg" numberOfLines={2}>
+				<Text className="font-semibold text-[20px]" numberOfLines={2}>
 					{item.volumeInfo.title}
 				</Text>
 
-				{item.volumeInfo.publishedDate && (
-					<Text className="text-gray-500 text-sm mt-1">
-						{item.volumeInfo.publishedDate.substring(0, 4)}
+				<View className={"flex flex-row items-center gap-1 mt-4"}>
+					<Text className="text-gray-500 text-[14px]">
+						{item.volumeInfo.publisher || "unknown"} •
+						{item?.volumeInfo?.publishedDate?.substring(0, 4) || "unknown"}
 					</Text>
-				)}
+				</View>
 			</View>
 		</TouchableOpacity>
 	);
@@ -121,7 +123,7 @@ export default function SearchScreen() {
 				</View>
 			)}
 
-			<View className="flex-1 bg-white">
+			<View className="flex-1 bg-transparent">
 				<View className="flex-1">
 					{isLoading ? (
 						<View className="flex-1 justify-center items-center">
@@ -144,15 +146,13 @@ export default function SearchScreen() {
 						</View>
 					) : (
 						<View className="flex-1 justify-center items-center p-4">
-							<Text className="text-gray-400 text-lg">
-								Search for books to get started
-							</Text>
+							<SvgXml xml={searchIcon} height={200} width={200} />
 						</View>
 					)}
 				</View>
 
 				{books && books.length > 0 && (
-					<View className="bg-black py-5 px-4 rounded-t-[30px] flex flex-row justify-between items-center">
+					<View className="bg-black py-5 flex flex-row justify-between items-center">
 						<TouchableOpacity
 							className={cn(
 								filter === "all" ? "bg-white rounded-full" : "bg-black",
@@ -204,17 +204,17 @@ export default function SearchScreen() {
 					</View>
 				)}
 				{!searchQuery && (
-					<View className="bg-black py-5 px-4 rounded-t-[30px]">
+					<View className="bg-black py-5 px-4">
 						<View className="flex flex-row items-center">
 							<View className="flex-1 ">
-								<View className="flex flex-row items-center bg-white rounded-2xl px-4 py-3">
+								<View className="flex flex-row items-center bg-white rounded-full px-4 py-3">
 									<TextInput
 										value={query}
 										onChangeText={setQuery}
 										placeholder="search..."
 										returnKeyType="search"
 										onSubmitEditing={handleSearch}
-										className="flex-1 text-base"
+										className="flex-1 text-black"
 										autoFocus
 									/>
 									<TouchableOpacity className="justify-center items-center">

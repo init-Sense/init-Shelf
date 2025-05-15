@@ -1,7 +1,7 @@
-import { Redirect, Tabs } from "expo-router";
+import { Redirect, Tabs, useSegments } from "expo-router";
 import "@/app/global.css";
 import { chartsIcon } from "@/assets/icons/charts-icon";
-import { searchIcon } from "@/assets/icons/search-icon";
+import { searchPlusIcon } from "@/assets/icons/search-plus-icon";
 import { shelfIcon } from "@/assets/icons/shelf-icon";
 import { cn } from "@/lib/utils/cn";
 import { useSession } from "@/store/AuthSessionProvider";
@@ -12,6 +12,17 @@ import { SvgXml } from "react-native-svg";
 
 const AppLayout: FC = () => {
 	const { session, isLoading } = useSession();
+	const segment = useSegments();
+	const page = segment[segment.length - 1];
+	const pagesToHideTabBar = [
+		"sign-in",
+		"sign-up",
+		"forgot-password",
+		"[id]",
+		"details",
+		"notes",
+	];
+
 	const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
 	useEffect(() => {
@@ -45,6 +56,7 @@ const AppLayout: FC = () => {
 					tabBarStyle: {
 						borderTopWidth: 0,
 						height: isKeyboardVisible ? 0 : 75,
+						display: pagesToHideTabBar.includes(page) ? "none" : "flex",
 					},
 				}}
 			>
@@ -90,7 +102,7 @@ const AppLayout: FC = () => {
 					name="search"
 					options={{
 						tabBarIcon: ({ focused }) => (
-							<SvgXml xml={searchIcon} width={30} height={30} />
+							<SvgXml xml={searchPlusIcon} width={30} height={30} />
 						),
 						tabBarLabel: ({ focused }) => (
 							<Text className={"text-sm absolute text-transparent"}>
