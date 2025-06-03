@@ -1,6 +1,6 @@
 import { plusIcon } from "@/assets/icons/plus-icon";
 import { xIcon } from "@/assets/icons/x-icon";
-import { useBook } from "@/hooks/useBook";
+import { useGetGoogleBook } from "@/hooks/useGetGoogleBook";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import {
@@ -18,7 +18,7 @@ import { SvgXml } from "react-native-svg";
 export default function BookDetailScreen() {
 	const { id } = useLocalSearchParams<{ id: string }>();
 	const router = useRouter();
-	const { data: book, isLoading, error } = useBook(id);
+	const { data: book, isLoading, error } = useGetGoogleBook(id);
 	const windowHeight = Dimensions.get("window").height;
 
 	if (isLoading) {

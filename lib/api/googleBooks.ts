@@ -1,38 +1,8 @@
-// TODO: Zod schema
+import type { GoogleBook } from "@/types/googleBook";
+
 const GOOGLE_BOOKS_API_BASE_URL = "https://www.googleapis.com/books/v1/volumes";
 const FIELDS =
 	"items(id,volumeInfo(title,authors,publisher,publishedDate,description,dimensions,industryIdentifiers,pageCount,printType,categories,imageLinks,language),searchInfo)";
-
-export interface GoogleBook {
-	id: string;
-	volumeInfo: {
-		title: string;
-		authors?: string[];
-		publisher?: string;
-		publishedDate?: string;
-		description?: string;
-		dimensions?: {
-			height?: string;
-			width?: string;
-			thickness?: string;
-		};
-		industryIdentifiers?: Array<{
-			type: string;
-			identifier: string;
-		}>;
-		pageCount?: number;
-		printType?: string;
-		language?: string;
-		categories?: string[];
-		imageLinks?: {
-			smallThumbnail?: string;
-			thumbnail?: string;
-		};
-	};
-	searchInfo?: {
-		textSnippet?: string;
-	};
-}
 
 export interface GoogleBooksResponse {
 	items?: GoogleBook[];

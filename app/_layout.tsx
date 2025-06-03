@@ -1,11 +1,14 @@
 import "./global.css";
 import { SessionProvider } from "@/store/AuthSessionProvider";
 import { Slot } from "expo-router";
+import { PaperProvider } from "react-native-paper";
 
 export default function RootLayout() {
 	return (
 		<SessionProvider>
-			<Slot />
+			<PaperProvider>
+				<Slot />
+			</PaperProvider>
 		</SessionProvider>
 	);
 }
