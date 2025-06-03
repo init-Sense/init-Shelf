@@ -5,13 +5,13 @@ meta {
 }
 
 get {
-  url: https://www.googleapis.com/books/v1/volumes?q=finzioni&langRestrict=it&fields=items(id,volumeInfo(title,authors,publisher,publishedDate,description,dimensions,industryIdentifiers,pageCount,printType,categories,imageLinks),searchInfo)
+  url: https://www.googleapis.com/books/v1/volumes?q=sen&langRestrict=it&fields=items(id,volumeInfo(title,authors,publisher,publishedDate,description,dimensions,industryIdentifiers,pageCount,printType,categories,imageLinks),searchInfo)
   body: none
   auth: inherit
 }
 
 params:query {
-  q: finzioni
+  q: sen
   langRestrict: it
   fields: items(id,volumeInfo(title,authors,publisher,publishedDate,description,dimensions,industryIdentifiers,pageCount,printType,categories,imageLinks),searchInfo)
 }
