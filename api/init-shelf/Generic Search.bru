@@ -1,0 +1,16 @@
+meta {
+  name: Generic Search
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://openlibrary.org/search.json?q=finzioni&fields=key,title,author_name,editions,editions.title,editions.language,editions.key,editions.publisher
+  body: none
+  auth: inherit
+}
+
+params:query {
+  q: finzioni
+  fields: key,title,author_name,editions,editions.title,editions.language,editions.key,editions.publisher
+}

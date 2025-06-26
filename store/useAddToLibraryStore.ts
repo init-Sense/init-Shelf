@@ -1,6 +1,5 @@
-import type { GoogleBook } from "@/lib/api/googleBooks";
+import type { GoogleBook } from "@/lib/hooks/googleBooks";
 import { supabase } from "@/lib/supabase";
-import { useSession } from "@/store/AuthSessionProvider";
 import type { CreateUserBook, UserBook } from "@/types/userBook";
 import type { CreateUserReadingSession } from "@/types/userReadingSession";
 import { create } from "zustand";
