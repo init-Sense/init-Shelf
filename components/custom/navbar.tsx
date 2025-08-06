@@ -17,7 +17,7 @@ export const Navbar = () => {
 		>
 			<Button
 				className={cn(
-					"flex flex-col items-center h-fit w-24 p-2",
+					"flex flex-col items-center h-fit w-24 p-2 rounded-lg",
 					pathname.startsWith("/library") ? "bg-black" : "bg-neutral-200",
 				)}
 				onPress={() => navigate("/(tabs)/library")}
@@ -28,14 +28,14 @@ export const Navbar = () => {
 					color={pathname.startsWith("/library") ? "white" : "black"}
 				/>
 				<Text
-					className={cn(pathname.startsWith("/library") ? " text-white" : "")}
+					className={cn(pathname.startsWith("/library") ? "text-white" : "")}
 				>
 					library
 				</Text>
 			</Button>
 			<Button
 				className={cn(
-					"flex flex-col items-center h-fit w-24 p-2",
+					"flex flex-col items-center h-fit w-24 p-2 rounded-lg",
 					pathname.startsWith("/search") ? "bg-black" : "bg-neutral-200",
 				)}
 				onPress={() => navigate("/(tabs)/search")}
@@ -53,7 +53,7 @@ export const Navbar = () => {
 			</Button>
 			<Button
 				className={cn(
-					"flex flex-col items-center h-fit w-24 p-2",
+					"flex flex-col items-center h-fit w-24 p-2 rounded-lg",
 					pathname.startsWith("/queue") ? "bg-black" : "bg-neutral-200",
 				)}
 				onPress={() => navigate("/(tabs)/queue")}
@@ -71,7 +71,7 @@ export const Navbar = () => {
 			</Button>
 			<Button
 				className={cn(
-					"flex flex-col items-center h-fit w-24 p-2",
+					"flex flex-col items-center h-fit w-24 p-2 rounded-lg",
 					pathname.startsWith("/dashboard") ? "bg-black" : "bg-neutral-200",
 				)}
 				onPress={() => navigate("/(tabs)/dashboard")}
