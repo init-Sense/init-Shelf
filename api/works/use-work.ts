@@ -1,9 +1,10 @@
-import {useQuery} from "@tanstack/react-query";
+import type { Work } from "@/types/work";
+import { useQuery } from "@tanstack/react-query";
 
 const SEARCH_API_BASE_URL = "https://openlibrary.org/works";
 
 export const useWork = (id: string) => {
-	return useQuery<any[], Error>({
+	return useQuery<Work[], Error>({
 		queryKey: ["work", id],
 		queryFn: async () => {
 			try {

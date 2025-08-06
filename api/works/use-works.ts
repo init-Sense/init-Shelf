@@ -1,4 +1,5 @@
-import {useQuery} from "@tanstack/react-query";
+import type { Work } from "@/types/work";
+import { useQuery } from "@tanstack/react-query";
 
 const SEARCH_API_BASE_URL = "https://openlibrary.org/search.json";
 
